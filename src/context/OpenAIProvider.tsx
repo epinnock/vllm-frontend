@@ -241,11 +241,10 @@ export default function OpenAIProvider({ children }: PropsWithChildren) {
       setLoading(true);
 
       messages_ = messages_.length ? messages_ : messages;
-      const vllm_openai_endpoint = process.env.VLLM_OPENAI_ENDPOINT;
-      const baseurl = vllm_openai_endpoint || "https://api.openai.com"
+
       try {
         const decoder = new TextDecoder();
-        const { body, ok } = fetch(baseurl+"/v1/chat/completions", {
+        const { body, ok } = await fetch("/api/completion", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

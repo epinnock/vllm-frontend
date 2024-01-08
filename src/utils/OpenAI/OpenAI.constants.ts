@@ -8,7 +8,7 @@ export const OpenAIChatModels: Record<string, OpenAIModel> = {
   },
   "deepseek6.7": {
     id: "deepseek-ai/deepseek-coder-6.7b-instruct",
-    name: "GPT-4",
+    name: "deepseek-ai/deepseek-coder-6.7b-instruct",
     maxLimit: 163600,
   },
   "gpt-4-0314": {
