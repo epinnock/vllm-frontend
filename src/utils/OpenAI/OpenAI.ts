@@ -5,12 +5,12 @@ import {
   ReconnectInterval,
 } from "eventsource-parser";
 const getDefaultModel = ()=>{
-  const vllm_model = process.env.VLLM_MODEL;
+  let vllm_model = process.env.VLLM_MODEL;
   return vllm_model || "gpt-3.5-turbo"
 
 }
 export const defaultConfig = {
-  model: getDefaultModel(),
+  model:"deepseek-ai/deepseek-coder-6.7b-instruct",
   temperature: 0.5,
   max_tokens: 2048,
   top_p: 1,
@@ -29,7 +29,8 @@ export const getOpenAICompletion = async (
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
   const vllm_openai_endpoint = process.env.VLLM_OPENAI_ENDPOINT;
-  const baseurl = vllm_openai_endpoint || "https://api.openai.com"
+  let baseurl = vllm_openai_endpoint || "https://api.openai.com"
+  baseurl = "http://0.0.0.0:8000"
   const response = await fetch(baseurl+"/v1/chat/completions", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -43,7 +44,7 @@ export const getOpenAICompletion = async (
   if (!response.ok) {
     throw new Error(await response.text());
   }
-
+  console.log(response)
   let counter = 0;
   const stream = new ReadableStream({
     async start(controller) {

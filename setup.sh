@@ -8,6 +8,6 @@ cd ..
 npm install -g yarn
 cd ./vllm-frontend
 export VLLM_MODEL="deepseek-ai/deepseek-coder-6.7b-instruct"
-export VLLM_OPENAI_ENDPOINT="0.0.0.0:8000"
+export VLLM_OPENAI_ENDPOINT="http://http://192.168.0.152:8000"
 yarn 
 yarn start
