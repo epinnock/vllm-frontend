@@ -13,7 +13,6 @@ export default async function handler(
 
   const configuration = new Configuration({
     apiKey,
-    basePath: `http://${process.env.VLLM_OPENAI_ENDPOINT}/v1`
   });
 
   const openAi = new OpenAIApi(configuration);

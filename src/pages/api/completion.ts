@@ -16,7 +16,7 @@ export default async function handler(
   res: NextApiResponse<Response>
 ) {
   const {
-    model,
+    model="deepseek-ai/deepseek-coder-6.7b-instruct",
     max_tokens,
     temperature,
     top_p,
