@@ -4,3 +4,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 source ~/.bashrc
 nvm install node
+cd ..
+npm install -g yarn
+cd ./vllm-frontend
+yarn 
+yarn start
