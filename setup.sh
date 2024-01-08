@@ -7,5 +7,7 @@ nvm install node
 cd ..
 npm install -g yarn
 cd ./vllm-frontend
+export VLLM_MODEL="deepseek-ai/deepseek-coder-6.7b-instruct"
+export VLLM_OPENAI_ENDPOINT="0.0.0.0:8000"
 yarn 
 yarn start

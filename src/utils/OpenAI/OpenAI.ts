@@ -4,9 +4,13 @@ import {
   ParsedEvent,
   ReconnectInterval,
 } from "eventsource-parser";
+const getDefaultModel = ()=>{
+  const vllm_model = process.env.VLLM_MODEL;
+  return vllm_model || "gpt-3.5-turbo"
 
+}
 export const defaultConfig = {
-  model: "gpt-3.5-turbo",
+  model: getDefaultModel(),
   temperature: 0.5,
   max_tokens: 2048,
   top_p: 1,
@@ -24,8 +28,9 @@ export const getOpenAICompletion = async (
 ) => {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
-
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+  const vllm_openai_endpoint = process.env.VLLM_OPENAI_ENDPOINT;
+  const baseurl = vllm_openai_endpoint || "https://api.openai.com"
+  const response = await fetch(baseurl+"/v1/chat/completions", {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
