@@ -27,11 +27,12 @@ export default async function handler(
     const models = data.map(({ id }) => id);
 
     // Get the models that can interface with the chat API and return
-    const chatModels = models
+   /* const chatModels = models
       .filter((model) => model in OpenAIChatModels)
       .map((model) => OpenAIChatModels[model as keyof typeof OpenAIChatModels])
       .sort((a, b) => (b.maxLimit || 0) - (a.maxLimit || 0)); // Sort by max limit
-
+*/
+    chatModels= models
     return res.status(200).json({
       models,
       chatModels,
