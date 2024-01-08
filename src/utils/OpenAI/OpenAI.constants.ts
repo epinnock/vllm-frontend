@@ -6,6 +6,11 @@ export const OpenAIChatModels: Record<string, OpenAIModel> = {
     name: "GPT-4",
     maxLimit: 8192,
   },
+  "deepseek6.7": {
+    id: "deepseek-ai/deepseek-coder-6.7b-instruct",
+    name: "GPT-4",
+    maxLimit: 163600,
+  },
   "gpt-4-0314": {
     id: "gpt-4-0314",
     name: "GPT-4 (03/14)",
