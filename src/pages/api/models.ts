@@ -12,18 +12,45 @@ export default async function handler(
   }
 
   const configuration = new Configuration({
-    apiKey,
+    apiKey:apiKey,
+    baseURL: 'http://192.168.0.152:8000',
+
   });
 
-  const openAi = new OpenAIApi(configuration);
 
+
+  const openAi = new OpenAIApi(configuration);
   try {
-    const {
-      data: { data },
-    } = await openAi.listModels();
+    const inner_data=[
+      {
+      id: "deepseek-ai/deepseek-coder-6.7b-instruct",
+      object: "model",
+      created: 1705337569,
+      owned_by: "vllm",
+      root: "deepseek-ai/deepseek-coder-6.7b-instruct",
+      parent: null,
+      permission: [
+      {
+      id: "modelperm-f13b5f8f92604237b10de3be817183df",
+      object: "model_permission",
+      created: 1705337569,
+      allow_create_engine: false,
+      allow_sampling: true,
+      allow_logprobs: true,
+      allow_search_indices: false,
+      allow_view: true,
+      allow_fine_tuning: false,
+      organization: "*",
+      group: null,
+      is_blocking: false
+      }
+      ]
+      }
+      ]
+
 
     // Get the list of models
-    const models = data.map(({ id }) => id);
+    const models = inner_data.map(({ id }) => id);
 
     // Get the models that can interface with the chat API and return
    /* const chatModels = models
@@ -31,10 +58,12 @@ export default async function handler(
       .map((model) => OpenAIChatModels[model as keyof typeof OpenAIChatModels])
       .sort((a, b) => (b.maxLimit || 0) - (a.maxLimit || 0)); // Sort by max limit
 */
-    chatModels= models
+
+    const chatModels = models
+
     return res.status(200).json({
       models,
-      chatModels,
+
     });
   } catch (e: any) {
     if (e.response) {

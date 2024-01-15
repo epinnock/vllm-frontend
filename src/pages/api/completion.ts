@@ -15,6 +15,7 @@ export default async function handler(
   req: Request,
   res: NextApiResponse<Response>
 ) {
+
   const {
     model="deepseek-ai/deepseek-coder-6.7b-instruct",
     max_tokens,
@@ -25,15 +26,16 @@ export default async function handler(
     messages,
   } = await req.json();
 
+
   if (!messages) {
     return new Response("Missing messages", { status: 400 });
   }
 
   const token = req.headers.get("Authorization")?.split(" ")[1];
+
   if (!token) {
     return new Response("Missing token", { status: 401 });
   }
-
   const config = {
     model: model || defaultConfig.model,
     max_tokens: max_tokens || defaultConfig.max_tokens,
@@ -51,10 +53,11 @@ export default async function handler(
   };
 
   try {
+    
     const stream = await getOpenAICompletion(token, payload);
     return new Response(stream);
-  } catch (e: any) {
-    return new Response(e.message || "Error fetching response.", {
+  } catch (f: any) {
+    return new Response( "Error fetching response.", {
       status: 500,
     });
   }

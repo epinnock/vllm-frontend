@@ -30,7 +30,8 @@ export const getOpenAICompletion = async (
   const decoder = new TextDecoder();
   const vllm_openai_endpoint = process.env.VLLM_OPENAI_ENDPOINT;
   let baseurl = vllm_openai_endpoint || "https://api.openai.com"
-  baseurl = "http://0.0.0.0:8000"
+  baseurl ="http://192.168.0.152:8000"
+ 
   const response = await fetch(baseurl+"/v1/chat/completions", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -67,6 +68,7 @@ export const getOpenAICompletion = async (
             controller.enqueue(queue);
             counter++;
           } catch (e) {
+            console.log(" Failed at line 70 OpenAI.ts")
             controller.error(e);
           }
         }
